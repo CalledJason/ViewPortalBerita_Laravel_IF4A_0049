@@ -7,10 +7,11 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index()
-    {
-        $posts = Post::all();
+    public function index() {
+        $featured = Post::first();
 
-        return view('index', compact('posts'));
+        $posts = Post::where('id', '!=', $featured->id)->get();
+
+        return view('index', compact('featured', 'posts'));
     }
 }
