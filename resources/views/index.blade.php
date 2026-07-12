@@ -4,46 +4,6 @@
 
 @section('body')
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-4 px-4 py-3 mb-5 container mt-3">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold fs-2" href="/posts">
-            Jason<span class="text-primary">News</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/posts">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nasional</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Global</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Teknologi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Lifestyle</a>
-                </li>
-            </ul>
-
-            @auth
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="btn btn-outline-dark">Logout</button>
-            </form>
-            @else
-            <a href="{{ route('login') }}" class="btn btn-dark">Login</a>
-            @endauth
-        </div>
-    </div>
-</nav>
-
 <style>
     body {
         background: #f5f5f5;
@@ -68,7 +28,7 @@
         font-weight: 700;
     }
 
-    /* --- HERO SECTION --- */
+    
     .hero {
         position: relative;
         border-radius: 20px;
@@ -124,12 +84,12 @@
         margin-top: 25px;
     }
 
-    /* --- SECTION TITLE (BIAR KANAN KIRI SEJAJAR) --- */
+    
     .section-title {
         font-size: 28px;
         font-weight: 700;
         margin-bottom: 20px;
-        height: 40px; /* Mengunci tinggi font judul agar sejajar lurus */
+        height: 40px; 
         display: flex;
         align-items: center;
     }
@@ -172,7 +132,7 @@
         margin-bottom: 15px;
     }
 
-    /* --- SIDEBAR TRENDING --- */
+   
     .sidebar-card {
         background: white;
         border-radius: 18px;
@@ -220,7 +180,7 @@
     
     {{-- HERO --}}
     <div class="hero">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600">
+        <img src="{{ $featured->photo }}">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-category">BREAKING NEWS</div>
@@ -241,13 +201,13 @@
         <div class="col-lg-8">
             <h2 class="section-title">Latest News</h2>
             
-            <!-- Menggunakan d-flex & gap-4 untuk memaksa card berita berjarak secara konsisten -->
+            
             <div class="d-flex flex-column gap-4">
                 @foreach($posts as $post)
                     <div class="news-card">
                         <div class="row g-0 align-items-center">
                             <div class="col-md-4">
-                                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=900">
+                                <img src="{{ $post->photo }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="news-body">
@@ -271,7 +231,7 @@
 
         {{-- Kolom Kanan: Trending --}}
         <div class="col-lg-4">
-            <!-- SEJAJAR! Judul Trending dikeluarkan dari card putih -->
+            
             <h2 class="section-title">Trending</h2>
             
             <div class="sidebar-card">

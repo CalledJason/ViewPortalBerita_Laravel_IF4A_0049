@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('photo');
+            $table->string('publisher');
             $table->text('content');
             $table->enum('published', ['yes', 'no']);
             $table->timestamps();
