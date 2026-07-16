@@ -197,15 +197,13 @@
     </div>
 
     {{-- MAIN CONTENT GRID --}}
-    <div class="row g-4">
+    <div class="row g-4 align-items-start">
         
         {{-- Kolom Kiri: Latest News --}}
         <div class="col-lg-8">
-            <div class="col-lg-8">
-
                 <div class="d-flex justify-content-between align-items-center mb-4">
 
-                    <h2 class="section-title mb-0">
+                    <h2 class="fw-bold mb-0">
                         Latest News
                     </h2>
 
@@ -292,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-                <a/>
+                </a>
                 @endforeach
             </div>
         </div>
