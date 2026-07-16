@@ -9,43 +9,103 @@ href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap
 .min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm rounded-4 px-4 py-3 mb-5 container mt-3">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold fs-2" href="/posts">
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-4 mt-4 mb-5">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold fs-2" href="{{ url('/posts') }}">
             Jason<span class="text-primary">News</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/posts">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nasional</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Global</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Teknologi</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Lifestyle</a>
-                </li>
-            </ul>
+        {{-- Navbar Login --}}
+        @if(request()->routeIs('login'))
 
-            @auth
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button class="btn btn-outline-dark">Logout</button>
-            </form>
-            @else
-            <a href="{{ route('login') }}" class="btn btn-dark">Login</a>
-            @endauth
-        </div>
+            <a href="{{ route('register') }}" class="btn btn-primary">
+                Register
+            </a>
+
+        {{-- Navbar Register --}}
+        @elseif(request()->routeIs('register'))
+
+            <a href="{{ route('login') }}" class="btn btn-dark">
+                Login
+            </a>
+
+        {{-- Navbar selain Login/Register --}}
+        @else
+
+            <button class="navbar-toggler" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/posts') }}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nasional</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Global</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Teknologi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lifestyle</a>
+                    </li>
+
+                </ul>
+
+                @guest
+
+                    <a href="{{ route('login') }}" class="btn btn-dark">
+                        Login
+                    </a>
+
+                @endguest
+
+                @auth
+
+                    <div class="dropdown">
+
+                        <button class="btn btn-dark dropdown-toggle"
+                                data-bs-toggle="dropdown">
+
+                            Halo, {{ Auth::user()->name }}
+
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                @endauth
+
+            </div>
+
+        @endif
+
     </div>
 </nav>
 @yield('body')
