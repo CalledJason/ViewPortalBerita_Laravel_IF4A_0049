@@ -16,7 +16,7 @@ class PostController extends Controller
 
         $popularPosts = Post::latest()->take(5)->get();
 
-        return view('index', compact(
+        return view('posts.index', compact(
             'featured',
             'posts',
             'popularPosts'
@@ -24,7 +24,7 @@ class PostController extends Controller
     }
 
     public function create() {
-        return view('post_create');
+        return view('posts.create');
     }
 
     public function store(Request $request)

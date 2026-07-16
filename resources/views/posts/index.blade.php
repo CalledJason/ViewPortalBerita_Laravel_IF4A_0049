@@ -13,7 +13,7 @@
 
 @endif
 
-@extends('master')
+@extends('layouts.master')
 
 @section('title', 'Jason News')
 
