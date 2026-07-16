@@ -29,11 +29,3 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 
-// Halaman yang membutuhkan login
-Route::middleware('auth')->group(function () {
-
-    Route::get('/home', function () {
-        return view('home');
-    });
-
-});
