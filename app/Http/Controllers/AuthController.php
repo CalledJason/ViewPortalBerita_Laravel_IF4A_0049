@@ -31,9 +31,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
-
-        return redirect('/home');
+        return redirect()->route('login')
+            ->with('success', 'Registrasi berhasil. Silakan login.');
     }
 
     // Tampilkan form login
@@ -53,7 +52,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/home');
+            return redirect()->route('posts.index');
         }
 
         return back()->withErrors([
@@ -69,6 +68,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('posts.index');
     }
 }
