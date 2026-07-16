@@ -190,7 +190,9 @@
             <p class="hero-desc">
                 {{ \Illuminate\Support\Str::limit($featured->content, 150) }}
             </p>
-            <button class="btn btn-light hero-btn">Read More &rarr;</button>
+            <a href="{{ route('posts.show', $featured->id) }}"
+                class="btn btn-light hero-btn">Read More &rarr;
+            </a>
         </div>
     </div>
 
@@ -199,35 +201,74 @@
         
         {{-- Kolom Kiri: Latest News --}}
         <div class="col-lg-8">
-            <h2 class="section-title">Latest News</h2>
-            
-            
-            <div class="d-flex flex-column gap-4">
-                @foreach($posts as $post)
-                    <div class="news-card">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-md-4">
-                                <img src="{{ $post->photo }}">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="news-body">
-                                    <span class="badge bg-dark mb-2">NEWS</span>
-                                    <h3 class="news-title">
-                                        {{ $post->title }}
-                                    </h3>
-                                    <p class="news-text">
-                                        {{ \Illuminate\Support\Str::limit($post->content, 120) }}
-                                    </p>
-                                    <small class="text-muted">
-                                        {{ optional($post->created_at)->format('d M Y') }}
-                                    </small>
+            <div class="col-lg-8">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <h2 class="section-title mb-0">
+                        Latest News
+                    </h2>
+
+                    @auth
+                        <a href="{{ route('posts.create') }}"
+                            class="btn btn-primary rounded-pill px-4">
+                            + Tulis Berita
+                        </a>
+                    @endauth
+
+                </div>
+
+                <div class="d-flex flex-column gap-4">
+
+                    @foreach($posts as $post)
+
+                    <a href="{{ route('posts.show', $post->id) }}"
+                        class="text-decoration-none text-dark">
+
+                        <div class="news-card">
+
+                            <div class="row g-0 align-items-center">
+
+                                <div class="col-md-4">
+                                    <img src="{{ $post->photo }}">
                                 </div>
+
+                                <div class="col-md-8">
+
+                                    <div class="news-body">
+
+                                        <span class="badge bg-dark mb-2">
+                                            NEWS
+                                        </span>
+
+                                        <h3 class="news-title">
+                                            {{ $post->title }}
+                                        </h3>
+
+                                        <p class="news-text">
+                                            {{ \Illuminate\Support\Str::limit($post->content, 120) }}
+                                        </p>
+
+                                        <small class="text-muted">
+                                            {{ optional($post->created_at)->format('d M Y') }}
+                                        </small>
+
+                                    </div>
+
+                                </div>
+
                             </div>
+
                         </div>
-                    </div>
-                @endforeach
-            </div>
+
+                    </a>
+
+                    @endforeach
+
+                </div>
+
         </div>
+        
 
         {{-- Kolom Kanan: Trending --}}
         <div class="col-lg-4">
@@ -236,6 +277,8 @@
             
             <div class="sidebar-card">
                 @foreach($posts->take(5) as $index => $popular)
+                <a href="{{ route('posts.show',$popular->id) }}"
+                    class="text-decoration-none text-dark">
                     <div class="popular-item">
                         <div class="popular-number">
                             {{ sprintf('%02d', $index + 1) }}
@@ -249,6 +292,7 @@
                             </div>
                         </div>
                     </div>
+                <a/>
                 @endforeach
             </div>
         </div>
