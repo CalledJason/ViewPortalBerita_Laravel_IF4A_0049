@@ -5,10 +5,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/posts');
 });
 
-Route::get('/posts', [PostController::class, 'index']);
+Route::resource('posts', PostController::class);
 
 // Halaman Register
 Route::get('/register', [AuthController::class, 'showRegister'])
