@@ -44,16 +44,15 @@ class PostController extends Controller
             ->with('success','Berita berhasil ditambahkan');
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
 
-        $relatedPosts = Post::where('id','!=',$id)
+        $relatedPosts = Post::where('id','!=',$post->id)
                             ->latest()
                             ->take(4)
                             ->get();
 
-        return view('post_detail',compact(
+        return view('posts.show',compact(
             'post',
             'relatedPosts'
         ));
