@@ -36,7 +36,7 @@
 
                     @endif
 
-                    <form action="{{ route('posts.update') }}"
+                    <form action="{{ route('posts.update', $post) }}"
                           method="POST">
 
                         @csrf

@@ -62,7 +62,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('post_edit',compact('post'));
+        return view('posts.edit',compact('post'));
     }
 
     public function update(Request $request,$id)
