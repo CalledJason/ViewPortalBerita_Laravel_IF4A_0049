@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('photo');
             $table->string('publisher');
             $table->text('content');
-            $table->enum('published', ['yes', 'no']);
+            $table->date('published');
             $table->timestamps();
         });
     }
